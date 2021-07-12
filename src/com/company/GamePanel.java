@@ -13,8 +13,8 @@ public class GamePanel extends JPanel  implements ActionListener {
     static final int UNIT_SIZE = 25;
     static final int GAME_UNITS = (SCREEN_WIDTH*SCREEN_HEIGHT)/UNIT_SIZE;
     static final int DELAY = 75;
-    final int x[] = new int[GAME_UNITS];
-    final int y[] = new int[GAME_UNITS];
+    final int[] x = new int[GAME_UNITS];
+    final int[] y = new int[GAME_UNITS];
     int bodyParts = 6;
     int applesEaten;
     int appleX;
@@ -48,23 +48,17 @@ public class GamePanel extends JPanel  implements ActionListener {
    public void draw(Graphics g) {
 
        if(running) {
-           /* for (int i = 0; i < SCREEN_HEIGHT / UNIT_SIZE; i++) {
-               g.drawLine(i * UNIT_SIZE, 0, i * UNIT_SIZE, SCREEN_HEIGHT);
-               g.drawLine(0, i * UNIT_SIZE, SCREEN_WIDTH, i * UNIT_SIZE);
-           } */
-
+           
            g.setColor(Color.red);
            g.fillOval(appleX, appleY, UNIT_SIZE, UNIT_SIZE);
 
            for (int i = 0; i < bodyParts; i++) {
                if (i == 0) {
                    g.setColor(Color.green);
-                   g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
                } else {
                    g.setColor(new Color(60, 200, 20));
-                   //g.setColor(new Color(random.nextInt(255), random.nextInt(255), random.nextInt(255)));
-                   g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
                }
+               g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
            }
 
            g.setColor(Color.red);
@@ -78,12 +72,12 @@ public class GamePanel extends JPanel  implements ActionListener {
    }
 
    public void newApple() {
-        appleX = random.nextInt((int)(SCREEN_WIDTH/UNIT_SIZE))*UNIT_SIZE;
-        appleY = random.nextInt((int)(SCREEN_HEIGHT/UNIT_SIZE))*UNIT_SIZE;
+        appleX = random.nextInt(SCREEN_WIDTH/UNIT_SIZE)*UNIT_SIZE;
+        appleY = random.nextInt(SCREEN_HEIGHT/UNIT_SIZE)*UNIT_SIZE;
        for (int i = bodyParts; i > 0; i--) {
            if ((appleX == x[0]) && (appleY == y[0]) || (appleX == x[i]) && (appleY == y[i])) {
-               appleX = random.nextInt((int)(SCREEN_WIDTH/UNIT_SIZE))*UNIT_SIZE;
-               appleY = random.nextInt((int)(SCREEN_HEIGHT/UNIT_SIZE))*UNIT_SIZE;
+               appleX = random.nextInt(SCREEN_WIDTH/UNIT_SIZE)*UNIT_SIZE;
+               appleY = random.nextInt(SCREEN_HEIGHT/UNIT_SIZE)*UNIT_SIZE;
            }
        }
    }
@@ -110,10 +104,11 @@ public class GamePanel extends JPanel  implements ActionListener {
         }
    }
 
-   public void checkColliosions() {
+   public void checkCollisions() {
         for (int i = bodyParts; i > 0; i--) {
             if ((x[0] == x[i]) && (y[0] == y[i])) {
                 running = false;
+                break;
             }
         }
 
@@ -156,7 +151,7 @@ public class GamePanel extends JPanel  implements ActionListener {
         if(running) {
             move();
             checkApple();
-            checkColliosions();
+            checkCollisions();
         }
         repaint();
     }
