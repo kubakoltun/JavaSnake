@@ -7,7 +7,6 @@ import java.awt.event.*;
 import java.util.Random;
 
 public class GamePanel extends JPanel  implements ActionListener {
-
     static final int SCREEN_WIDTH = 600;
     static final int SCREEN_HEIGHT = 600;
     static final int UNIT_SIZE = 25;
@@ -46,9 +45,7 @@ public class GamePanel extends JPanel  implements ActionListener {
    }
 
    public void draw(Graphics g) {
-
        if(running) {
-           
            g.setColor(Color.red);
            g.fillOval(appleX, appleY, UNIT_SIZE, UNIT_SIZE);
 
@@ -74,7 +71,7 @@ public class GamePanel extends JPanel  implements ActionListener {
    public void newApple() {
         appleX = random.nextInt(SCREEN_WIDTH/UNIT_SIZE)*UNIT_SIZE;
         appleY = random.nextInt(SCREEN_HEIGHT/UNIT_SIZE)*UNIT_SIZE;
-       for (int i = bodyParts; i > 0; i--) {
+        for (int i = bodyParts; i > 0; i--) {
            if ((appleX == x[0]) && (appleY == y[0]) || (appleX == x[i]) && (appleY == y[i])) {
                appleX = random.nextInt(SCREEN_WIDTH/UNIT_SIZE)*UNIT_SIZE;
                appleY = random.nextInt(SCREEN_HEIGHT/UNIT_SIZE)*UNIT_SIZE;
@@ -134,16 +131,14 @@ public class GamePanel extends JPanel  implements ActionListener {
    }
 
    public void gameOver(Graphics g) {
-
        g.setColor(Color.red);
        g.setFont(new Font("Gothic", Font.BOLD, 40));
        FontMetrics metrics1 = getFontMetrics(g.getFont());
        g.drawString("Score: " + applesEaten, (SCREEN_WIDTH - metrics1.stringWidth("Score: " + applesEaten))/2, g.getFont().getSize());
-
-        g.setColor(Color.red);
-        g.setFont(new Font("Gothic", Font.BOLD, 75));
-        FontMetrics metrics2 = getFontMetrics(g.getFont());
-        g.drawString("Game Over", (SCREEN_WIDTH - metrics2.stringWidth("Game Over"))/2, SCREEN_HEIGHT/2);
+       g.setColor(Color.red);
+       g.setFont(new Font("Gothic", Font.BOLD, 75));
+       FontMetrics metrics2 = getFontMetrics(g.getFont());
+       g.drawString("Game Over", (SCREEN_WIDTH - metrics2.stringWidth("Game Over"))/2, SCREEN_HEIGHT/2);
    }
 
     @Override
