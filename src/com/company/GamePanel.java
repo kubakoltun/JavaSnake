@@ -45,7 +45,7 @@ public class GamePanel extends JPanel  implements ActionListener {
    }
 
    public void draw(Graphics g) {
-       if(running) {
+       if (running) {
            g.setColor(Color.red);
            g.fillOval(appleX, appleY, UNIT_SIZE, UNIT_SIZE);
 
@@ -62,7 +62,6 @@ public class GamePanel extends JPanel  implements ActionListener {
            g.setFont(new Font("Gothic", Font.BOLD, 40));
            FontMetrics metrics = getFontMetrics(g.getFont());
            g.drawString("Score: " + applesEaten, (SCREEN_WIDTH - metrics.stringWidth("Score: " + applesEaten))/2, g.getFont().getSize());
-
        } else {
            gameOver(g);
        }
@@ -112,22 +111,18 @@ public class GamePanel extends JPanel  implements ActionListener {
         if (x[0] < 0) {
             running = false;
         }
-
-       if (x[0] > SCREEN_WIDTH) {
-           running = false;
-       }
-
-       if (y[0] < 0) {
-           running = false;
-       }
-
-       if (y[0] > SCREEN_HEIGHT) {
-           running = false;
-       }
-
-       if (!running) {
-           timer.stop();
-       }
+        if (x[0] > SCREEN_WIDTH) {
+            running = false;
+        }
+        if (y[0] < 0) {
+            running = false;
+        }
+        if (y[0] > SCREEN_HEIGHT) {
+            running = false;
+        }
+        if (!running) {
+            timer.stop();
+        }
    }
 
    public void gameOver(Graphics g) {
@@ -160,19 +155,16 @@ public class GamePanel extends JPanel  implements ActionListener {
                             direction = 'L';
                     }
                 }
-
                 case KeyEvent.VK_RIGHT -> {
                     if (direction != 'L') {
                         direction = 'R';
                     }
                 }
-
                 case KeyEvent.VK_UP -> {
                     if (direction != 'D') {
                         direction = 'U';
                     }
                 }
-
                 case KeyEvent.VK_DOWN -> {
                     if (direction != 'U') {
                         direction = 'D';
